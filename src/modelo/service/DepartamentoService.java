@@ -15,4 +15,16 @@ public class DepartamentoService {
 		return depDao.buscarTodos();
 		
 	}
+	
+	public void salvarOuAtualizar(Departamento obj) {
+		
+		if (obj.getId() == null) {
+			
+			depDao.inserir(obj);
+		}else {
+			
+			depDao.update(obj);
+		}
+			
+	}
 }
