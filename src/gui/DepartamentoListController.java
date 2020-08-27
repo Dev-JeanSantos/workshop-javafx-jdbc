@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.Main;
+import gui.listner.DataChangeListner;
 import gui.util.Alerts;
 import gui.util.Utils;
 import javafx.collections.FXCollections;
@@ -26,7 +27,7 @@ import javafx.stage.Stage;
 import modelo.entidades.Departamento;
 import modelo.service.DepartamentoService;
 
-public class DepartamentoListController implements Initializable{
+public class DepartamentoListController implements Initializable, DataChangeListner{
 	
 	private DepartamentoService service;
 	
@@ -95,6 +96,7 @@ public class DepartamentoListController implements Initializable{
 			DepartamentoFormControle controller = loader.getController();
 			controller.setDepartamento(obj);
 			controller.setDepartamentoService(new DepartamentoService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
@@ -110,6 +112,13 @@ public class DepartamentoListController implements Initializable{
 			
 			Alerts.showAlert("IOException", "Erro ao carregar a Tela", e.getMessage(), AlertType.ERROR);
 		}
+	}
+
+
+	@Override
+	public void onDataChange() {
+		updateTableview();
+		
 	}
 
 }
