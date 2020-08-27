@@ -3,8 +3,9 @@ package gui;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
-
+import java.util.Set;
 
 import db.DbException;
 import gui.listner.DataChangeListner;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.exceptios.ValidacaoDeExcecao;
 import javafx.scene.control.Alert.AlertType;
 import modelo.entidades.Departamento;
 import modelo.service.DepartamentoService;
@@ -61,6 +63,10 @@ public class DepartamentoFormControle implements Initializable{
 			notifyDataChangeListner();
 			Utils.estagioCorrente(evento).close();
 		}
+		catch (ValidacaoDeExcecao e) {
+			
+			setMensagemDeErros(e.getErros());
+		}
 		catch (DbException e) {
 			
 			Alerts.showAlert("Erro ao salvar objeto", null, e.getMessage(), AlertType.ERROR);
@@ -78,9 +84,20 @@ public class DepartamentoFormControle implements Initializable{
 
 	private Departamento getFormData() {
 		
+		ValidacaoDeExcecao validacaoErro = new ValidacaoDeExcecao("Erro de Validação");
+		
 		Departamento obj = new Departamento();
 		obj.setId(gui.util.Utils.tryParseToInt( txtId.getText()));
+		
+		if(txtNome.getText() == null || txtNome.getText().trim().equals("")) {
+			
+			validacaoErro.addErros("nome", "Campo não dever ser vazio");
+		}
 		obj.setNome(txtNome.getText());
+		
+		if (validacaoErro.getErros().size() >0) {
+			throw validacaoErro;
+		}
 		
 		return obj;
 	}
@@ -129,6 +146,16 @@ public class DepartamentoFormControle implements Initializable{
 		
 		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtNome, 30);
+		
+	}
+	
+	private void setMensagemDeErros(Map<String , String> erros) {
+		
+		Set<String> campos = erros.keySet();
+		if (campos.contains("nome")) {
+			labelErrorNome.setText(erros.get("nome"));
+			
+		}
 		
 	}
 	
