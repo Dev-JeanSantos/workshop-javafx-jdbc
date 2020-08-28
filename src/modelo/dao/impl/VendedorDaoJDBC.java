@@ -71,10 +71,7 @@ public class VendedorDaoJDBC implements VendedorDao {
 	public void update(Vendedor obj) {
 		
 		PreparedStatement st = null;
-		
-		//, email = ?, dataNascimento = ?, salario = ?, departamentoid =?
-		
-		
+			
 		try {
 			
 			st = conn.prepareStatement(
@@ -82,10 +79,10 @@ public class VendedorDaoJDBC implements VendedorDao {
 					+ " SET nome = ? "
 					+ "WHERE id = ? ");
 			st.setString(1, obj.getNome());
-			/*st.setString(2, obj.getEmail());
+			st.setString(2, obj.getEmail());
 			st.setDate(3,new java.sql.Date (obj.getDataNascimento().getTime()));
 			st.setDouble(4, obj.getSalario());
-			st.setInt(5,obj.getDepartamento().getId());*/
+			st.setInt(5,obj.getDepartamento().getId());
 			st.setInt(2, obj.getId());
 			
 			st.executeUpdate();

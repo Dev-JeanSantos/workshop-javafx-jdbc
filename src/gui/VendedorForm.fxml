@@ -34,6 +34,10 @@
             <Label text="Nome" GridPane.rowIndex="1" />
             <TextField fx:id="txtId" editable="false" prefHeight="25.0" prefWidth="220.0" GridPane.columnIndex="1" />
             <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <DatePicker fx:id="dpDataNascimento" prefHeight="25.0" prefWidth="179.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtSalario" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="comboBoxDepartamento" prefHeight="25.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label fx:id="labelErrorNome" prefHeight="17.0" prefWidth="194.0" textFill="#f50606" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
@@ -47,15 +51,20 @@
             <Label text="Email" GridPane.rowIndex="2" />
             <Label text="Data de Nascimento" GridPane.rowIndex="3" />
             <Label text="Salário" GridPane.rowIndex="4" />
-            <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtSalario" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Departamento" GridPane.rowIndex="5" />
-            <DatePicker fx:id="dpDataNascimento" prefHeight="25.0" prefWidth="179.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="labelErrorDataNascimento" prefHeight="17.0" prefWidth="204.0" textFill="#f20404" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Label fx:id="labelErrorSalario" prefHeight="17.0" prefWidth="210.0" textFill="#fc0505" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="labelErrorDataNascimento" prefHeight="17.0" prefWidth="204.0" textFill="#f20404" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="labelErrorSalario" prefHeight="17.0" prefWidth="210.0" textFill="#fc0505" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
             <Label prefHeight="17.0" prefWidth="222.0" textFill="#f50303" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Label fx:id="labelErrorEmail" prefHeight="17.0" prefWidth="240.0" textFill="#f50909" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <ComboBox fx:id="comboBoxDepartamento" prefHeight="25.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorEmail" prefHeight="17.0" prefWidth="240.0" textFill="#f50909" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin></Label>
          </children>
       </GridPane>
    </children>

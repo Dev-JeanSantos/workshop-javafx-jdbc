@@ -1,9 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -129,11 +131,34 @@ public class VendedorFormControle implements Initializable {
 			validacaoErro.addErros("nome", "Campo não dever ser vazio");
 		}
 		obj.setNome(txtNome.getText());
+		
+		if (txtEmail.getText() == null || txtEmail.getText().trim().equals("")) {
+
+			validacaoErro.addErros("email", "Campo não dever ser vazio");
+		}
+		obj.setEmail(txtEmail.getText());
+		
+		if(dpDataNascimento.getValue() == null) {
+			
+			validacaoErro.addErros("dataNascimento", "Campo não dever ser vazio");
+		}
+		else {
+			
+			Instant instant = Instant.from(dpDataNascimento.getValue().atStartOfDay(ZoneId.systemDefault()));
+			obj.setDataNascimento(Date.from(instant));
+			
+		}
+		if (txtSalario.getText() == null || txtSalario.getText().trim().equals("")) {
+
+			validacaoErro.addErros("salario", "Campo não dever ser vazio");
+		}
+		obj.setSalario(Utils.tryParseToDouble(txtSalario.getText()));
 
 		if (validacaoErro.getErros().size() > 0) {
 			throw validacaoErro;
 		}
-
+		
+		obj.setDepartamento(comboBoxDepartamento.getValue());
 		return obj;
 	}
 
@@ -217,7 +242,27 @@ public class VendedorFormControle implements Initializable {
 		Set<String> campos = erros.keySet();
 		if (campos.contains("nome")) {
 			labelErrorNome.setText(erros.get("nome"));
+		}else {
+			labelErrorNome.setText(erros.get(""));
+		}
+		
+		if (campos.contains("email")) {
+			labelErrorEmail.setText(erros.get("email"));
+		}else {
+			labelErrorEmail.setText(erros.get(""));
+		}
+		
+			
+		if (campos.contains("salario")) {
+			labelErrorSalario.setText(erros.get("salario"));
+		}else {
+			labelErrorSalario.setText(erros.get(""));
+		}
 
+		if (campos.contains("dataNascimento")) {
+			labelErrorDataNascimento.setText(erros.get("dataNascimento"));
+		}else {
+			labelErrorDataNascimento.setText(erros.get(""));
 		}
 
 	}
