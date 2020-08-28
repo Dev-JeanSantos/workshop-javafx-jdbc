@@ -108,7 +108,7 @@ public class DepartamentoListController implements Initializable, DataChangeList
 			controller.updateFormData();
 
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Entre com os dados Departamento: ");
+			dialogStage.setTitle("Entre com os dados do Departamento: ");
 			dialogStage.setScene(new Scene(pane));
 			dialogStage.setResizable(false);
 			dialogStage.initOwner(parentStage);
@@ -130,7 +130,7 @@ public class DepartamentoListController implements Initializable, DataChangeList
 	private void initEditButtons() {
 		tableColumnEDITAR.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDITAR.setCellFactory(param -> new TableCell<Departamento, Departamento>() {
-			private final Button button = new Button("edit");
+			private final Button button = new Button("Editar");
 
 			@Override
 			protected void updateItem(Departamento obj, boolean empty) {
@@ -149,7 +149,7 @@ public class DepartamentoListController implements Initializable, DataChangeList
 	private void initRemoveButtons() {
 		tableColumnEXCLUIR.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEXCLUIR.setCellFactory(param -> new TableCell<Departamento, Departamento>() {
-			private final Button button = new Button("remove");
+			private final Button button = new Button("Remover");
 
 			@Override
 			protected void updateItem(Departamento obj, boolean empty) {
