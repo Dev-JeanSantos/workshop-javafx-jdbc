@@ -76,14 +76,14 @@ public class VendedorDaoJDBC implements VendedorDao {
 			
 			st = conn.prepareStatement(
 					"UPDATE  vendedor "
-					+ " SET nome = ? "
+					+ " SET nome = ?, email = ?, dataNascimento = ?, salario = ?, departamentoid = ? "
 					+ "WHERE id = ? ");
 			st.setString(1, obj.getNome());
 			st.setString(2, obj.getEmail());
 			st.setDate(3,new java.sql.Date (obj.getDataNascimento().getTime()));
 			st.setDouble(4, obj.getSalario());
 			st.setInt(5,obj.getDepartamento().getId());
-			st.setInt(2, obj.getId());
+			st.setInt(6, obj.getId());
 			
 			st.executeUpdate();
 						
