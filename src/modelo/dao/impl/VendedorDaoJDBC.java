@@ -222,7 +222,7 @@ public class VendedorDaoJDBC implements VendedorDao {
 		obj.setId(rs.getInt("id"));//Setando a Variavel setId com o resultado vendedorId
 		obj.setNome(rs.getString("nome"));//Setando a Variavel setNome com o resultado vendedorNome
 		obj.setEmail(rs.getString("email"));//Setando a Variavel setEmail com o resultado vendedorEmail
-		obj.setDataNascimento(rs.getDate("dataNascimento"));
+		obj.setDataNascimento(new java.util.Date(rs.getTimestamp("dataNascimento").getTime()));
 		obj.setSalario(rs.getDouble("salario"));
 		obj.setDepartamento(dep);//Associando o objeto departamento ao vendedor
 		

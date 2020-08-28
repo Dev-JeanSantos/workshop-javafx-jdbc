@@ -1,8 +1,11 @@
 package gui;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -15,11 +18,12 @@ import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.exceptios.ValidacaoDeExcecao;
-import javafx.scene.control.Alert.AlertType;
 import modelo.entidades.Vendedor;
 import modelo.service.VendedorService;
 
@@ -39,13 +43,22 @@ public class VendedorFormControle implements Initializable{
 	private TextField txtEmail;
 	
 	@FXML
-	private TextField txtDataNascimento;
+	private DatePicker dpDataNascimento;
 	
 	@FXML
 	private TextField txtSalario;
 	
 	@FXML
 	private Label labelErrorNome;
+	
+	@FXML
+	private Label labelErrorEmail;
+	
+	@FXML
+	private Label labelErrorDataNascimento;
+	
+	@FXML
+	private Label labelErrorSalario;
 	
 	@FXML
 	private Button btSalvar;
@@ -141,6 +154,14 @@ public class VendedorFormControle implements Initializable{
 		
 		txtId.setText(String.valueOf(entidade.getId()));
 		txtNome.setText(entidade.getNome());
+		txtEmail.setText(entidade.getEmail());
+		Locale.setDefault(Locale.US);
+		txtSalario.setText(String.format("%.2f", entidade.getSalario()));
+		if(entidade.getDataNascimento() != null) {
+			
+			dpDataNascimento.setValue(LocalDate.ofInstant(entidade.getDataNascimento().toInstant(), ZoneId.systemDefault() ) ); 
+		}
+		
 	
 	}
 	
@@ -154,8 +175,10 @@ public class VendedorFormControle implements Initializable{
 	private void initializeNodes() {
 		
 		Constraints.setTextFieldInteger(txtId);
-		Constraints.setTextFieldMaxLength(txtNome, 30);
-		
+		Constraints.setTextFieldMaxLength(txtNome, 60);
+		Constraints.setTextFieldDouble(txtSalario);
+		Constraints.setTextFieldMaxLength(txtEmail, 60);
+		Utils.formatDatePicker(dpDataNascimento, "dd/MM/yyyy");
 	}
 	
 	private void setMensagemDeErros(Map<String , String> erros) {
